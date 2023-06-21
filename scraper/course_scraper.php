@@ -10,7 +10,7 @@ if (isset($argv[1])) {
 }
 
 //$year_array = array("2015","2016","2017","2018","2019","2020");
-$year_array = array("2017","2018","2019","2020");
+$year_array = array("2017","2018","2019","2020","2021","2022","2023","2024");
 $course_array = array();
 
 function getArrayFromSession($s) {

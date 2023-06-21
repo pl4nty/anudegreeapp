@@ -9,7 +9,7 @@ if (isset($argv[1])) {
     $n = -1;
 }
 
-$year_array = array("2015","2016","2017","2018","2019","2020");
+$year_array = array("2017","2018","2019","2020","2021","2022","2023","2024");
 $programs = array();
 
 foreach ($year_array as $year) {
@@ -21,17 +21,17 @@ foreach ($year_array as $year) {
     $xml2 = $xml->children()->children();
     $i = 0;
     foreach ($xml2 as $element) {
-        $programs[$year][(string)$element->AcademicPlanCode] = array(
-            //"code" => (string)$element->AcademicPlanCode,
-            "name" => (string)$element->ProgramName,
-            "level" => (string)$element->AcademicCareer,
+        $programs[$year][$i] = array(
+            "c" => (string)$element->AcademicPlanCode,
+            "n" => (string)$element->ProgramName,
+            "l" => (string)$element->AcademicCareer,
         );
         $i++;
     }
     print "Programs loaded for " . $year . ": " . $i . "\n";
 }
 
-$fp = fopen("output/programs.json", 'w');
+$fp = fopen("output/programs.min.json", 'w');
 fwrite($fp,json_encode($programs));
 fclose($fp);
 

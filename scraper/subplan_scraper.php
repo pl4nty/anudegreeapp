@@ -1,5 +1,5 @@
 <?php
-$year_array = array("2015","2016","2017","2018","2019","2020");
+$year_array = array("2017","2018","2019","2020","2021","2022","2023","2024");
 $plan_array = array("Major","Minor","Specialisation");
 
 foreach ($plan_array as $plan) {
@@ -13,10 +13,11 @@ foreach ($plan_array as $plan) {
         $xml2 = $xml->children()->children();
         $i = 0;
         foreach ($xml2 as $element) {
-            $result[$year][(string)$element->SubPlanCode] = array(
-                "name" => (string)$element->Name,
-                "level" => (string)$element->Career,
-                "units" => (string)$element->Units,
+            $result[$year][$i] = array(
+                "c" => (string)$element->SubPlanCode,
+                "n" => (string)$element->Name,
+                "l" => (string)$element->Career,
+                "u" => (string)$element->Units,
             );
             $i++;
         }
