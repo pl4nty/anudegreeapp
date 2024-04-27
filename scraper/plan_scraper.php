@@ -9,7 +9,7 @@ if (isset($argv[1])) {
     $n = -1;
 }
 
-$year_array = array("2017","2018","2019","2020","2021","2022","2023","2024");
+$year_array = array("2017","2018","2019","2020","2021","2022","2023","2024","2025");
 $programs = array();
 
 foreach ($year_array as $year) {

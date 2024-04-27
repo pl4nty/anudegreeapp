@@ -18,8 +18,8 @@ const APP_VERSION = 0.2;
 const DATA_NAMES = ["courses", "majors", "minors", "programs"];
 
 const START_YEAR_DATA = "2017";
-const CURRENT_YEAR = "2023";
-const END_YEAR_DATA= "2024";
+const CURRENT_YEAR = "2024";
+const END_YEAR_DATA= "2025";
 
 const YEAR_LIST = ["STE", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024"];
 const DEFAULT_SESSION_ORDER = ["First Semester","Second Semester","Summer Session","Winter Session","Autumn Session","Spring Session"];
@@ -353,7 +353,7 @@ function getDataSource(year) {
     if (year > END_YEAR_DATA) {
         return END_YEAR_DATA;
     } else if(year < START_YEAR_DATA) {
-        return START_YEAR_DATA;
+       return START_YEAR_DATA;
     } else {
         return year;
     }
@@ -430,7 +430,7 @@ function parseISISImport(input) {
 
 /*********************************
     DATA TYPE DECLARATIONS
-    *********************************/
+ *********************************/
 function Year(name, dataName) {
     return {
         name: name,
@@ -467,7 +467,7 @@ function Plan(code, type, html) {
 
 /*********************************
     CLASSES
-    *********************************/
+ *********************************/
 class Model {
 
     constructor() {
@@ -499,13 +499,13 @@ class Model {
 
     sortStore() {
         this.store.years.forEach(year => {
-            year.sessions.sort((s1, s2) => {
-                let s1Index = TIME_SESSION_ORDER.indexOf(s1.name);
-                let s2Index = TIME_SESSION_ORDER.indexOf(s2.name);
-                if (s1Index < s2Index) { return -1; }
-                if (s1Index > s2Index) {return 1; }
-                return 0;
-            });
+           year.sessions.sort((s1, s2) => {
+               let s1Index = TIME_SESSION_ORDER.indexOf(s1.name);
+               let s2Index = TIME_SESSION_ORDER.indexOf(s2.name);
+               if (s1Index < s2Index) { return -1; }
+               if (s1Index > s2Index) {return 1; }
+               return 0;
+           });
         });
         this.store.years.sort((y1, y2) => {
             if (y1.name < y2.name) { return -1; }
@@ -541,7 +541,7 @@ class Model {
     getYearIndex(year) {
         year = year.toString();
         let index = _.findIndex(this.store.years, (yearIteration) => {
-            return yearIteration.name === year;
+           return yearIteration.name === year;
         });
         return index === -1 ? RETURN_CODES.NOT_EXISTS.YEAR : index;
     }
@@ -895,26 +895,26 @@ class Model {
         this.store.years.forEach((year, yIndex) => {
             rtn.sessions[year.name] = {};
             year.sessions.forEach((session, sIndex) => {
-                session.courses.forEach((course, cIndex) => {
-                    let faculty = course.code.substr(0,4);
-                    let level = course.code.substr(4,1)+"000";
-                    let courseModel = this.getCourseData(year.name, course.code);
-                    let units = courseModel !== RETURN_CODES.DATA_NOT_FOUND.COURSE_MODEL ? parseInt(courseModel.units) : 6;
+               session.courses.forEach((course, cIndex) => {
+                   let faculty = course.code.substr(0,4);
+                   let level = course.code.substr(4,1)+"000";
+                   let courseModel = this.getCourseData(year.name, course.code);
+                   let units = courseModel !== RETURN_CODES.DATA_NOT_FOUND.COURSE_MODEL ? parseInt(courseModel.units) : 6;
 
-                    if (!rtn.sessions[year.name].hasOwnProperty(session.name)) {
-                        rtn.sessions[year.name][session.name] = 0;
-                    }
-                    console.log(courseModel.units);
-                    rtn.sessions[year.name][session.name] += units;
+                   if (!rtn.sessions[year.name].hasOwnProperty(session.name)) {
+                       rtn.sessions[year.name][session.name] = 0;
+                   }
+                   console.log(courseModel.units);
+                   rtn.sessions[year.name][session.name] += units;
 
-                    if (!rtn.codes.hasOwnProperty(level)) {
-                        rtn.codes[level] = {};
-                    }
-                    if (!rtn.codes[level].hasOwnProperty(faculty)) {
-                        rtn.codes[level][faculty] = 0;
-                    }
-                    rtn.codes[level][faculty] += units;
-                });
+                   if (!rtn.codes.hasOwnProperty(level)) {
+                       rtn.codes[level] = {};
+                   }
+                   if (!rtn.codes[level].hasOwnProperty(faculty)) {
+                       rtn.codes[level][faculty] = 0;
+                   }
+                   rtn.codes[level][faculty] += units;
+               });
             });
         });
         return rtn;
@@ -1024,8 +1024,8 @@ class Model {
         let rtn = [];
         let yearSrc = this.getYearDataSource(year);
         this.data.majors[yearSrc].forEach((plan) => {
-            let group = cached.includes(plan.c) ? "prev" : "curr";
-            rtn.push({...plan, type: 'Major', group: group});
+           let group = cached.includes(plan.c) ? "prev" : "curr";
+           rtn.push({...plan, type: 'Major', group: group});
         });
         this.data.minors[yearSrc].forEach((plan) => {
             let group = cached.includes(plan.c) ? "prev" : "curr";
@@ -1091,7 +1091,7 @@ class Model {
      */
     resetPlanCache() {
         this.store.years.forEach((year) => {
-            year.plans = [];
+           year.plans = [];
         });
         this._commit();
     }
@@ -1143,11 +1143,11 @@ class Model {
     getCachedPlans() {
         let rtn = [];
         this.store.years.forEach((year) => {
-            year.plans.forEach((plan) => {
-                if (_.indexOf(rtn, plan.code) === -1) {
-                    rtn.push(plan.code);
-                }
-            });
+           year.plans.forEach((plan) => {
+               if (_.indexOf(rtn, plan.code) === -1) {
+                   rtn.push(plan.code);
+               }
+           });
         });
         return rtn;
     }
@@ -1417,8 +1417,8 @@ class View {
             yesCallback(e, context);
         });
         noBtn.one('click', (e) => {
-            yesBtn.off('click');
-            noCallback(e, context);
+           yesBtn.off('click');
+           noCallback(e, context);
         });
     }
 
@@ -1457,22 +1457,22 @@ class View {
 
     getUnitSummaryHTML(data) {
         return {
-            codes: generateHtmlTable(data.codes, "Level", true, true, (a,b) => {
-                let aCnt = 0;
-                let bCnt = 0;
-                for (let level of Object.keys(data.codes)) {
-                    if (data.codes[level].hasOwnProperty(a)) {
-                        aCnt += data.codes[level][a];
-                    }
-                    if (data.codes[level].hasOwnProperty(b)) {
-                        bCnt += data.codes[level][b];
-                    }
-                }
-                return bCnt - aCnt;
-            }),
-            sessions: generateHtmlTable(data.sessions, "Year", true, true, (a,b) => {
-                return DEFAULT_SESSION_ORDER.indexOf(a) - DEFAULT_SESSION_ORDER.indexOf(b);
-            })
+          codes: generateHtmlTable(data.codes, "Level", true, true, (a,b) => {
+              let aCnt = 0;
+              let bCnt = 0;
+              for (let level of Object.keys(data.codes)) {
+                  if (data.codes[level].hasOwnProperty(a)) {
+                      aCnt += data.codes[level][a];
+                  }
+                  if (data.codes[level].hasOwnProperty(b)) {
+                      bCnt += data.codes[level][b];
+                  }
+              }
+              return bCnt - aCnt;
+          }),
+          sessions: generateHtmlTable(data.sessions, "Year", true, true, (a,b) => {
+              return DEFAULT_SESSION_ORDER.indexOf(a) - DEFAULT_SESSION_ORDER.indexOf(b);
+          })
         };
 
     }
@@ -1505,22 +1505,22 @@ class View {
         this.page.modals.gpa.wam.table.find("table tbody").html("");
         let i = 0;
         app.model.store.years.forEach(year => {
-            year.sessions.forEach(session => {
-                session.courses.forEach(course => {
-                    let courseData = app.model.getCourseData(year.name, course.code);
-                    let data = {
-                        year: year.name,
-                        session: session.name,
-                        code: course.code,
-                        units: courseData.units,
-                        name: courseData.name,
-                        mark: course.mark === null ? "" : course.mark,
-                        grade: course.mark === null ? "" : getGradeFromMark(course.mark)
-                    };
-                    this.page.modals.gpa.wam.lastElement.append(this.page.tmpl.wamRow.get(data));
-                    i++;
-                });
-            });
+           year.sessions.forEach(session => {
+              session.courses.forEach(course => {
+                 let courseData = app.model.getCourseData(year.name, course.code);
+                 let data = {
+                     year: year.name,
+                     session: session.name,
+                     code: course.code,
+                     units: courseData.units,
+                     name: courseData.name,
+                     mark: course.mark === null ? "" : course.mark,
+                     grade: course.mark === null ? "" : getGradeFromMark(course.mark)
+                 };
+                 this.page.modals.gpa.wam.lastElement.append(this.page.tmpl.wamRow.get(data));
+                 i++;
+              });
+           });
         });
         if (i === 0) {
             this.page.modals.gpa.wam.lastElement.append("<tr><td colspan='4'>Add courses to your planner to calculate WAM</td></tr>");
@@ -1581,7 +1581,7 @@ class View {
             year.sessions.forEach((session) => {
                 this.addSession(year.name, session.name);
                 session.courses.forEach((course) => {
-                    app.view.addCourse(year.name, session.name, course.code);
+                   app.view.addCourse(year.name, session.name, course.code);
                 });
             });
         });
@@ -1602,7 +1602,7 @@ class View {
             return course.c.substr(0,4);
         });
         return [...new Set(codeList)].map((code) => {
-            return {value: code, text: code};
+           return {value: code, text: code};
         });
     }
 
@@ -1619,7 +1619,7 @@ class Controller {
     constructor(model, view) {
         this.model = model;
         this.view = view;
-        this.currentYear = 2023;
+        this.currentYear = 2024;
         this.currentSession = "First Semester";
         this.registerEvents();
         this.loadLocalStorage();
@@ -1779,13 +1779,13 @@ class Controller {
             let sel = $(e.target);
             let val = sel.val();
             if (val % 1 !== 0) {
-                sel.addClass("is-invalid");
+               sel.addClass("is-invalid");
             } else {
-                sel.removeClass("is-invalid");
-                app.view.updateGPAFields(sel, val);
-                let gpa = calculateGPA(app.view.getGPAGradeCounts());
-                v.modals.gpa.gpa.resultGPA.text(gpa);
-                v.modals.gpa.gpa.goal.gpa.val(gpa);
+               sel.removeClass("is-invalid");
+               app.view.updateGPAFields(sel, val);
+               let gpa = calculateGPA(app.view.getGPAGradeCounts());
+               v.modals.gpa.gpa.resultGPA.text(gpa);
+               v.modals.gpa.gpa.goal.gpa.val(gpa);
             }
         });
 
@@ -1907,8 +1907,8 @@ class Controller {
             if (confirm("Are you sure you want to reset your data?")) {
                 let years = app.model.getCurrentYears();
                 years.forEach((year) => {
-                    app.view.removeYear(year);
-                    app.model.removeYear(year);
+                   app.view.removeYear(year);
+                   app.model.removeYear(year);
                 });
             }
         });
