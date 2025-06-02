@@ -1619,7 +1619,7 @@ class Controller {
     constructor(model, view) {
         this.model = model;
         this.view = view;
-        this.currentYear = 2024;
+        this.currentYear = 2020;
         this.currentSession = "First Semester";
         this.registerEvents();
         this.loadLocalStorage();

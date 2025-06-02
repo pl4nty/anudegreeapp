@@ -1,5 +1,5 @@
 <?php
-$year_array = array("2017","2018","2019","2020","2021","2022","2023","2024");
+$year_array = array("2017","2018","2019","2020","2021","2022","2023","2024","2025","2026");
 $plan_array = array("Major","Minor","Specialisation");
 
 foreach ($plan_array as $plan) {
