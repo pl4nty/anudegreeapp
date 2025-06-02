@@ -12,16 +12,16 @@
 /*********************************
     CONSTANTS
  *********************************/
-const DATA_UPDATED = "03/01/2020";
+const DATA_UPDATED = "01/06/2025";
 const DATA_VERSION = 2;
 const APP_VERSION = 0.2;
 const DATA_NAMES = ["courses", "majors", "minors", "programs"];
 
 const START_YEAR_DATA = "2017";
-const CURRENT_YEAR = "2024";
-const END_YEAR_DATA= "2025";
+const CURRENT_YEAR = "2025";
+const END_YEAR_DATA= "2026";
 
-const YEAR_LIST = ["STE", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024"];
+const YEAR_LIST = ["STE", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025", "2026"];
 const DEFAULT_SESSION_ORDER = ["First Semester","Second Semester","Summer Session","Winter Session","Autumn Session","Spring Session"];
 const TIME_SESSION_ORDER = ["First Semester","Autumn Session","Winter Session","Second Semester","Spring Session","Summer Session"];
 const GRADE_MARKS = [7,6,5,4,0];
