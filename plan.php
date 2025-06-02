@@ -40,7 +40,6 @@ try {
             }
         }
     }
-    http_response_code(200);
 } catch (Exception $e) {
     error_log("[plan.php] Error: " . $e->getMessage());
     http_response_code(500);
